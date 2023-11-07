@@ -402,7 +402,7 @@
                         android:lines="1"
                         android:padding="2dp"
                         android:textAlignment="textEnd"
-                        android:textColor="#8F9BB3"
+                        android:textColor="#F44336"
                         app:layout_constraintEnd_toStartOf="@+id/addressEditBtn"
                         tools:text="A+" />
 
