@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import coil.load
 import com.maruf.firebaseauth.databinding.FragmentProfileBinding
-import com.maruf.firebaseauth.model.userInfo.UserInfo
+import com.maruf.firebaseauth.data.userInfo.UserInfo
 import com.maruf.firebaseauth.viewmodel.FirebaseViewModel
 
 

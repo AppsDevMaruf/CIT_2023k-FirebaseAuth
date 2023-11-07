@@ -18,7 +18,7 @@ import com.maruf.firebaseauth.ProfileFragment
 import com.maruf.firebaseauth.R
 import com.maruf.firebaseauth.UsersFragment
 import com.maruf.firebaseauth.databinding.FragmentHomeBinding
-import com.maruf.firebaseauth.model.userInfo.UserInfo
+import com.maruf.firebaseauth.data.userInfo.UserInfo
 import com.maruf.firebaseauth.viewPagerAdapter.ViewPager2Adapter
 import com.maruf.firebaseauth.viewmodel.FirebaseViewModel
 
@@ -38,9 +38,9 @@ class HomeFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        if (GoogleSignIn.getLastSignedInAccount(requireActivity()) == null) {
-           findNavController().navigate(R.id.action_homeFragment_to_signUpFragment)
-        }
+//        if (GoogleSignIn.getLastSignedInAccount(requireActivity()) == null) {
+//           findNavController().navigate(R.id.action_homeFragment_to_signUpFragment)
+//        }
     }
     private fun setTab() {
         val tabNameArray = arrayOf("Users","Chat","Profile")

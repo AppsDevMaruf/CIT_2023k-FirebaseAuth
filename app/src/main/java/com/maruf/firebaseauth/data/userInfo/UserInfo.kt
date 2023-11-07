@@ -1,4 +1,4 @@
-package com.maruf.firebaseauth.model.userInfo
+package com.maruf.firebaseauth.data.userInfo
 
 import java.io.Serializable
 

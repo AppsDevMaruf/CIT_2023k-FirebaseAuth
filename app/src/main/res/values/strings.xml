@@ -2,4 +2,12 @@
     <string name="app_name">FirebaseAuth</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id">673642975964-bv717eiop621rff5bjvieq2fgphfcr4k.apps.googleusercontent.com</string>
+    <string name="full_name">Full Name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="department">Department</string>
+    <string name="hall">Hall</string>
+    <string name="address">Address</string>
+    <string name="farmget_dhaka_1215">Farmget,Dhaka-1215</string>
+    <string name="gender">Gender</string>
+    <string name="birthdate">Birthdate</string>
 </resources>
