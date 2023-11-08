@@ -36,12 +36,7 @@ class HomeFragment : Fragment() {
         setTab()
         return binding.root
     }
-    override fun onStart() {
-        super.onStart()
-//        if (GoogleSignIn.getLastSignedInAccount(requireActivity()) == null) {
-//           findNavController().navigate(R.id.action_homeFragment_to_signUpFragment)
-//        }
-    }
+
     private fun setTab() {
         val tabNameArray = arrayOf("Users","Chat","Profile")
     val viewPagerAdapter =

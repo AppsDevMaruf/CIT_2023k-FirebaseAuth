@@ -12,5 +12,4 @@ data class RequestUserRegister(
     var token:String="",
     var mobile: String?=null
 
-
 )

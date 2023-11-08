@@ -11,6 +11,4 @@ data class UserProfile(
     var about: String = "",
     var token: String = "",
     var mobile: String? = null
-
-
 )
