@@ -101,7 +101,6 @@ class ProfileFragment : Fragment() {
         }
 
 
-
         return binding.root
 
     }

@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="blue">#2b1473</color>
+    <color name="text_gray">#9909101D</color>
+    <color name="text_black">#E609101D</color>
+    <color name="bluedeep">#0a0449</color>
+    <color name="background">#F5F5F5</color>
+    <color name="text_red">#EB5757</color>
+    <color name="green100">#00AA0E</color>
+
+    <color name="base_color">#192049</color>
+    <color name="yellow">#FF9800</color>
+    <color name="blue_grey">#DFF5FF</color>
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorPrimaryLight">#1E88E5</color>
+
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+
+
+    <!--Material color list from https://material.io/guidelines/style/color.html-->
+
+    <color name="red_500">#F44336</color>
+    <color name="red_700">#D32F2F</color>
+    <color name="red_900">#B71C1C</color>
+    <color name="red_A700">#D50000</color>
+
+    <color name="green_500">#4CAF50</color>
+
+    <color name="blue_grey_300">#90A4AE</color>
+
+    <color name="grey_50">#FAFAFA</color>
+
+    <color name="text_enable_white">#F2F2F2</color>
+    <color name="text_disable_white">#FFFFFF</color>
+    <color name="text_grey">#4F4F4F</color>
+    <color name="cta_grey">#D9D9D9</color>
+    <color name="back_grey">#F6F6F6</color>
+    <color name="text_primary">#8F9BB3</color>
 </resources>

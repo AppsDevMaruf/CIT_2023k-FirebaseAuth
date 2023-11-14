@@ -8,6 +8,6 @@ import com.google.firebase.database.FirebaseDatabase
 object FirebaseUtils {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
-
-
+    const val REMOTE_USER_KEY = "remote_user_key_id"
+    const val CHATS = "chats"
 }

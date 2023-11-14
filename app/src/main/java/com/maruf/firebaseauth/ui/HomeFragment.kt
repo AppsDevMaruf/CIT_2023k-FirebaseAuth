@@ -19,6 +19,7 @@ import com.maruf.firebaseauth.R
 import com.maruf.firebaseauth.UsersFragment
 import com.maruf.firebaseauth.databinding.FragmentHomeBinding
 import com.maruf.firebaseauth.data.userInfo.UserInfo
+import com.maruf.firebaseauth.utils.FirebaseUtils
 import com.maruf.firebaseauth.viewPagerAdapter.ViewPager2Adapter
 import com.maruf.firebaseauth.viewmodel.FirebaseViewModel
 
@@ -26,23 +27,24 @@ import com.maruf.firebaseauth.viewmodel.FirebaseViewModel
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
+    private var remoteUserID: String = ""
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        checkArgument()
         binding = FragmentHomeBinding.inflate(layoutInflater,null,false)
         setTab()
         return binding.root
     }
 
     private fun setTab() {
-        val tabNameArray = arrayOf("Users","Chat","Profile")
+        val tabNameArray = arrayOf("Users","Profile")
     val viewPagerAdapter =
             ViewPager2Adapter(childFragmentManager, viewLifecycleOwner.lifecycle).apply {
                 addFragment(UsersFragment())
-                addFragment(ChatFragment())
                 addFragment(ProfileFragment())
 
             }
@@ -55,6 +57,13 @@ class HomeFragment : Fragment() {
                 tab.text = tabNameArray[position]
             }.attach()
 
+        }
+    }
+    private fun checkArgument() {
+        if (arguments?.containsKey(FirebaseUtils.REMOTE_USER_KEY) == true) {
+            requireActivity().intent.getStringExtra(FirebaseUtils.REMOTE_USER_KEY)?.let {
+                remoteUserID = it
+            }
         }
     }
 

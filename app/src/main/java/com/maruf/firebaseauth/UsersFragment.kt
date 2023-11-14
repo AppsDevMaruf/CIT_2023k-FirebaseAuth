@@ -1,59 +1,83 @@
 package com.maruf.firebaseauth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.maruf.firebaseauth.adapter.UserAdapter
+import com.maruf.firebaseauth.data.user.UserProfile
+import com.maruf.firebaseauth.databinding.FragmentUsersBinding
+import com.maruf.firebaseauth.utils.FirebaseUtils
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UsersFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UsersFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentUsersBinding
+    private lateinit var adapter: UserAdapter
+    private lateinit var user: FirebaseUser
+    private lateinit var dbRef: DatabaseReference
+    private lateinit var firebaseDB: FirebaseDatabase
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var userList = mutableListOf<UserProfile>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false)
+
+        binding = FragmentUsersBinding.inflate(layoutInflater, null, false)
+        adapter = UserAdapter(object :UserAdapter.Listener{
+            override fun profileClicked(userId: String) {
+
+            }
+
+            override fun messageMeClicked(userId: String) {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_chatFragment,
+                    bundleOf(FirebaseUtils.REMOTE_USER_KEY to userId)
+                )
+            }
+        })
+        user = FirebaseAuth.getInstance().currentUser!!
+        user.let {
+            firebaseDB = FirebaseDatabase.getInstance()
+            dbRef = firebaseDB.reference.child("user")
+            dbRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    userList.clear()
+
+                    snapshot.children.forEach { dataSnapshot ->
+                        val value = dataSnapshot.getValue(UserProfile::class.java)
+                        value?.let { user ->
+                            userList.add(user)
+                            adapter.submitList(userList)
+                            binding.userRcv.adapter = adapter
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("TAG", "Failed to read value.", error.toException())
+                }
+
+            })
+        }
+
+
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UsersFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UsersFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

@@ -1,59 +1,108 @@
 package com.maruf.firebaseauth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.maruf.firebaseauth.adapter.ChatAdapter
+import com.maruf.firebaseauth.data.chat.Chat
+import com.maruf.firebaseauth.databinding.FragmentChatBinding
+import com.maruf.firebaseauth.utils.FirebaseUtils
+import com.maruf.firebaseauth.utils.FirebaseUtils.CHATS
+import java.util.UUID
+import kotlin.math.log
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChatFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentChatBinding
+    lateinit var adapter: ChatAdapter
+    private lateinit var user: FirebaseUser
+    private lateinit var dbRef: DatabaseReference
+    private lateinit var firebaseDB: FirebaseDatabase
+    var chatList = mutableListOf<Chat>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private var remoteUserID: String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
-    }
+    ): View {
+        checkArgument()
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChatFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        binding = FragmentChatBinding.inflate(layoutInflater, null, false)
+        user = FirebaseAuth.getInstance().currentUser!!
+
+        firebaseDB = FirebaseDatabase.getInstance()
+        dbRef = firebaseDB.reference.child(CHATS)
+        binding.sendBtn.setOnClickListener {
+            sendMgs()
+        }
+
+        //chat list
+
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chatList.clear()
+                snapshot.children.forEach { dataSnapshot ->
+                    val value = dataSnapshot.getValue(Chat::class.java)
+                    value?.let { chat ->
+                       /* if (chat.receiverID == user.uid && chat.senderID == remoteUserID || chat.receiverID == remoteUserID && chat.senderID == user.uid) {
+                            chatList.add(chat)
+                            val sortedChat = chatList.sortedBy { it.timeStamp }
+                            Toast.makeText(requireActivity(), "${chatList.size}", Toast.LENGTH_SHORT).show()
+
+                        }*/
+                        chatList.add(chat)
+                        adapter = ChatAdapter(chatList, myID = user.uid)
+                        binding.chatRCV.adapter = adapter
+                    }
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("TAG", "Failed to read value.", error.toException())
+            }
+        })
+
+        return binding.root
+    }
+
+    private fun sendMgs() {
+        val message = binding.textInputEdt.text.toString().trim()
+        val chatID = UUID.randomUUID().toString()
+
+        val chat = Chat(
+            senderID = user.uid,
+            receiverID = remoteUserID,
+            message = message,
+            chatID = chatID,
+            timeStamp = System.currentTimeMillis()
+        )
+        dbRef.child(chat.chatID).setValue(chat).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(requireActivity(), "mgs send successfully", Toast.LENGTH_SHORT)
+                    .show()
+
+            }
+        }.addOnFailureListener {
+            Log.d("TAG", "${it.localizedMessage}: ")
+        }
+        binding.textInputEdt.text?.clear()
+    }
+
+    private fun checkArgument() {
+        // Retrieve the value from the arguments bundle
+        arguments?.getString(FirebaseUtils.REMOTE_USER_KEY)?.let {
+            remoteUserID = it
+
+        }
     }
 }
