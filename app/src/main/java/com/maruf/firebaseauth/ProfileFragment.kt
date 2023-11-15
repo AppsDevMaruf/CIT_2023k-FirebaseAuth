@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
@@ -61,6 +62,12 @@ class ProfileFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater, null, false)
+        binding.btnLogout.setOnClickListener {
+            // Inside your fragment or activity
+            FirebaseAuth.getInstance().signOut()
+// After signing out, navigate to the login page or perform any other necessary actions
+            findNavController().navigate(R.id.loginFragment)
+        }
 
         user = FirebaseAuth.getInstance().currentUser!!
         user.let {

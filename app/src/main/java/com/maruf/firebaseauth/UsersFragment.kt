@@ -24,7 +24,6 @@ import com.maruf.firebaseauth.utils.FirebaseUtils
 class UsersFragment : Fragment() {
     private lateinit var binding: FragmentUsersBinding
     private lateinit var adapter: UserAdapter
-    private lateinit var user: FirebaseUser
     private lateinit var dbRef: DatabaseReference
     private lateinit var firebaseDB: FirebaseDatabase
 
@@ -49,8 +48,8 @@ class UsersFragment : Fragment() {
                 )
             }
         })
-        user = FirebaseAuth.getInstance().currentUser!!
-        user.let {
+        val currentUserID = FirebaseAuth.getInstance().currentUser?.uid
+        currentUserID?.let {currentUser->
             firebaseDB = FirebaseDatabase.getInstance()
             dbRef = firebaseDB.reference.child("user")
             dbRef.addValueEventListener(object : ValueEventListener {
@@ -60,11 +59,14 @@ class UsersFragment : Fragment() {
                     snapshot.children.forEach { dataSnapshot ->
                         val value = dataSnapshot.getValue(UserProfile::class.java)
                         value?.let { user ->
-                            userList.add(user)
-                            adapter.submitList(userList)
-                            binding.userRcv.adapter = adapter
+                            if (user.userId!=currentUser){
+                                userList.add(user)
+                            }
                         }
                     }
+                    // Submit the list and set the adapter outside the loop
+                    adapter.submitList(userList)
+                    binding.userRcv.adapter = adapter
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -73,8 +75,6 @@ class UsersFragment : Fragment() {
 
             })
         }
-
-
         return binding.root
 
     }

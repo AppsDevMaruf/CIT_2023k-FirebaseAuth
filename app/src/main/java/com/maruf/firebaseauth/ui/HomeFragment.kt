@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import coil.load
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import com.maruf.firebaseauth.ChatFragment
 import com.maruf.firebaseauth.ProfileFragment
 import com.maruf.firebaseauth.R
@@ -49,15 +50,23 @@ class HomeFragment : Fragment() {
 
             }
         binding.apply {
-            vpMain.apply {
+            viewPager.apply {
                 adapter = viewPagerAdapter
             }
 
-            TabLayoutMediator(tabCategory, vpMain) { tab, position ->
+            TabLayoutMediator(tabCategory, viewPager) { tab, position ->
                 tab.text = tabNameArray[position]
             }.attach()
 
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            findNavController().navigate(R.id.loginFragment)
+        }
+
     }
     private fun checkArgument() {
         if (arguments?.containsKey(FirebaseUtils.REMOTE_USER_KEY) == true) {

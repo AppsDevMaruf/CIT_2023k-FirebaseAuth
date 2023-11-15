@@ -31,9 +31,9 @@ class UserAdapter(private var listener: Listener) : ListAdapter<UserProfile, Use
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         getItem(position).let {
             holder.itemUserBinding.apply {
-                userNameTv.text = it.name
-                userEmailTv.text = it.email
-                userBioTv.text = it.about
+                userName.text = it.name
+                userEmail.text = it.email
+                userBio.text = it.about
                 profileImage.load(it.image)
             }
             holder.itemUserBinding.profileBtn.setOnClickListener { _ ->
@@ -43,6 +43,10 @@ class UserAdapter(private var listener: Listener) : ListAdapter<UserProfile, Use
                 listener.messageMeClicked(it.userId)
 
             }
+            holder.itemView.setOnClickListener {
+
+            }
+
 
 
         }

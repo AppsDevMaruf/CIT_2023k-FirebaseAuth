@@ -20,7 +20,6 @@ import com.maruf.firebaseauth.databinding.FragmentChatBinding
 import com.maruf.firebaseauth.utils.FirebaseUtils
 import com.maruf.firebaseauth.utils.FirebaseUtils.CHATS
 import java.util.UUID
-import kotlin.math.log
 
 class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
@@ -54,15 +53,14 @@ class ChatFragment : Fragment() {
                 snapshot.children.forEach { dataSnapshot ->
                     val value = dataSnapshot.getValue(Chat::class.java)
                     value?.let { chat ->
-                       /* if (chat.receiverID == user.uid && chat.senderID == remoteUserID || chat.receiverID == remoteUserID && chat.senderID == user.uid) {
+                        if (chat.receiverID == user.uid && chat.senderID == remoteUserID || chat.receiverID == remoteUserID && chat.senderID == user.uid) {
                             chatList.add(chat)
                             val sortedChat = chatList.sortedBy { it.timeStamp }
-                            Toast.makeText(requireActivity(), "${chatList.size}", Toast.LENGTH_SHORT).show()
-
-                        }*/
-                        chatList.add(chat)
-                        adapter = ChatAdapter(chatList, myID = user.uid)
-                        binding.chatRCV.adapter = adapter
+                            adapter = ChatAdapter(sortedChat, user.uid)
+                            binding.chatRCV.adapter = adapter
+                            Log.d("TAG", "onDataChange: $chatList")
+                            Log.d("TAG", "sortedChatOnDataChange: $sortedChat")
+                        }
                     }
                 }
             }

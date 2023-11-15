@@ -20,6 +20,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <ImageView
+                android:id="@+id/btnLogout"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_round_logout_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="24dp"
+                tools:layout_editor_absoluteY="-6dp" />
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/userProfilePic"
                 android:layout_width="100dp"
@@ -120,7 +131,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/profession"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -161,7 +171,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/phoneNumber"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -241,7 +250,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/department"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -323,7 +331,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/gender"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -364,7 +371,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/birthdate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -405,7 +411,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/bloodGroup"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -445,7 +450,6 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/district"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -468,7 +472,6 @@
                     android:background="#F4F4F4" />
 
                 <Button
-                    android:id="@+id/editBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginHorizontal="64dp"

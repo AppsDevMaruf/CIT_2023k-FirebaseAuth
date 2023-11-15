@@ -128,7 +128,6 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/profession"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_gravity="start"
@@ -200,7 +199,6 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/department"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_gravity="start"
@@ -235,7 +233,6 @@
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/bloodGroupTypeSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="5dp"
@@ -343,7 +340,6 @@
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/genderTypeSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="5dp"
@@ -409,7 +405,6 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/birthdate"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_gravity="start"
