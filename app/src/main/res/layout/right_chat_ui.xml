@@ -20,5 +20,4 @@
         android:text="i am good "
         android:textColor="@color/blue_grey" />
 
-
 </LinearLayout>

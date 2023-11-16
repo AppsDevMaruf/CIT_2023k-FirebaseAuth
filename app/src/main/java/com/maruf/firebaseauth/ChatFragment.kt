@@ -58,8 +58,6 @@ class ChatFragment : Fragment() {
                             val sortedChat = chatList.sortedBy { it.timeStamp }
                             adapter = ChatAdapter(sortedChat, user.uid)
                             binding.chatRCV.adapter = adapter
-                            Log.d("TAG", "onDataChange: $chatList")
-                            Log.d("TAG", "sortedChatOnDataChange: $sortedChat")
                         }
                     }
                 }

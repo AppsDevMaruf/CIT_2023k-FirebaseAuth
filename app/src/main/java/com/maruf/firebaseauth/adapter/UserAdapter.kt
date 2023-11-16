@@ -1,6 +1,5 @@
 package com.maruf.firebaseauth.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.maruf.firebaseauth.data.user.UserProfile
 import com.maruf.firebaseauth.databinding.ItemUserBinding
-
 
 class UserAdapter(private var listener: Listener) : ListAdapter<UserProfile, UserAdapter.UserViewHolder>(Comparator) {
     interface Listener {

@@ -9,27 +9,21 @@ import com.maruf.firebaseauth.R
 import com.maruf.firebaseauth.data.chat.Chat
 
 
-class ChatAdapter(val chatList: List<Chat>, var myID: String) :
-    RecyclerView.Adapter<ChatAdapter.VH>() {
+class ChatAdapter(val chatList: List<Chat>, var myID: String) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
     private val RIGHT = 1
     private val LEFT = 2
-    class VH(val view: View) : RecyclerView.ViewHolder(view) {
+    inner  class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val messageTv = view.findViewById<TextView>(R.id.messagetxt)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
 
         return if (viewType == RIGHT) {
-            val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.right_chat_ui, parent, false)
-
-            VH(view)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.right_chat_ui, parent, false)
+            ChatViewHolder(view)
         } else {
-
-            val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.left_chat_ui, parent, false)
-
-            VH(view)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.left_chat_ui, parent, false)
+            ChatViewHolder(view)
         }
 
 
@@ -39,7 +33,7 @@ class ChatAdapter(val chatList: List<Chat>, var myID: String) :
         return chatList.size
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
+    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val chat = chatList[position]
         holder.messageTv.text = chat.message
     }
@@ -51,6 +45,7 @@ class ChatAdapter(val chatList: List<Chat>, var myID: String) :
             LEFT
         }
     }
+
 
 
 }
