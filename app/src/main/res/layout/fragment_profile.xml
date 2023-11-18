@@ -47,19 +47,6 @@
                 app:strokeWidth="2dp"
                 tools:ignore="MissingConstraints" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/uploadProfilePic"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:padding="4dp"
-                app:contentPadding="4dp"
-                android:background="@color/white"
-                app:shapeAppearanceOverlay="@style/Circular"
-                android:src="@drawable/round_camera_alt_24"
-                android:tint="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/userProfilePic"
-                app:layout_constraintEnd_toEndOf="@+id/userProfilePic" />
-
 
             <LinearLayout
                 android:id="@+id/mainLayout"
@@ -171,6 +158,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/mobile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -472,6 +460,7 @@
                     android:background="#F4F4F4" />
 
                 <Button
+                    android:id="@+id/editProfileBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginHorizontal="64dp"

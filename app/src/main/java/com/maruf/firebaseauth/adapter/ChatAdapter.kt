@@ -26,7 +26,6 @@ class ChatAdapter(val chatList: List<Chat>, var myID: String) : RecyclerView.Ada
             ChatViewHolder(view)
         }
 
-
     }
 
     override fun getItemCount(): Int {

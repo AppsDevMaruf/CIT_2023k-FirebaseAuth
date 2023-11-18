@@ -36,6 +36,12 @@
         <action
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileUpdateFragment"
+            app:destination="@id/profileUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -52,4 +58,8 @@
         android:name="com.maruf.firebaseauth.UsersFragment"
         android:label="fragment_users"
         tools:layout="@layout/fragment_users" />
+    <fragment
+        android:id="@+id/profileUpdateFragment"
+        android:name="com.maruf.firebaseauth.ui.ProfileUpdateFragment"
+        android:label="ProfileUpdateFragment" />
 </navigation>

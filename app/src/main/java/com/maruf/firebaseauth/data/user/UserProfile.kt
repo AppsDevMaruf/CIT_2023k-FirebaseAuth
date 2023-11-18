@@ -8,7 +8,7 @@ data class UserProfile(
     var image: String = "",
     var name: String = "",
     var email: String = "",
-    var about: String = "",
+    var address: String = "",
     var token: String = "",
     var mobile: String? = null
 )
